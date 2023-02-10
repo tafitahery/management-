@@ -8,8 +8,8 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  -webkit-box-shadow: 0px -1px 44px 2px rgba(0, 0, 0, 0.43);
-  box-shadow: 0px -1px 44px 2px rgba(0, 0, 0, 0.43);
+  -webkit-box-shadow: 0px 4px 12px -1px rgba(0, 0, 0, 0.33);
+  box-shadow: 0px 4px 12px -1px rgba(0, 0, 0, 0.33);
 `;
 
 const Logo = styled.div`
