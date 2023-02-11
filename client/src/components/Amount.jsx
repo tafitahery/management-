@@ -5,7 +5,6 @@ import Card from './Card';
 
 const Container = styled.div`
   display: flex;
-  margin: 20px 0;
   align-items: center;
   height: 120px;
   padding: 10px;

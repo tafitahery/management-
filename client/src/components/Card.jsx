@@ -4,9 +4,9 @@ import { BsFillCaretDownFill } from 'react-icons/bs';
 
 const Container = styled.div`
   flex: 1;
-  margin: 30px 60px 30px 30px;
+  margin: 0px 60px 0px 30px;
   padding: 10px;
-  height: 70px;
+  height: 50px;
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
@@ -18,10 +18,11 @@ const Container = styled.div`
 const Label = styled.div`
   font-size: 18px;
   font-weight: 300;
+  color: gray;
 `;
 
 const Amount = styled.div`
-  font-size: 42px;
+  font-size: 32px;
   font-weight: 500;
   margin-left: 50px;
   display: flex;

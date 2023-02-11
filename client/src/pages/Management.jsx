@@ -1,6 +1,7 @@
 import React from 'react';
-import Amount from '../components/Amount';
 
+import Amount from '../components/Amount';
+import NewEntry from '../components/NewEntry';
 import Topbar from '../components/Topbar';
 
 export default function Management() {
@@ -8,6 +9,7 @@ export default function Management() {
     <div>
       <Topbar />
       <Amount />
+      <NewEntry />
     </div>
   );
 }
