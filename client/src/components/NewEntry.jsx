@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const Container = styled.div`
   display: flex;
@@ -76,25 +77,58 @@ const Validation = styled.button`
   font-size: 18px;
   padding: 10px;
   border-radius: 10px;
+  cursor: pointer;
 `;
 
 export default function NewEntry() {
+  const [entry, setEntry] = useState({
+    amount: 0,
+    type: '',
+    motifs: '',
+  });
+
+  const handleChange = (e) => {
+    setEntry((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const date = Date.now();
+    try {
+      await axios.post('http://localhost:5000/amounts', { ...entry, date });
+      setEntry({ amount: 0, type: '', motifs: '' });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Container>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Wrapper>
-          <Input type="number" autoFocus />
+          <Input
+            type="number"
+            name="amount"
+            autoFocus
+            value={entry.amount}
+            onChange={handleChange}
+          />
           <Currency>Ar</Currency>
         </Wrapper>
         <Wrapper>
-          <Select>
-            <Option> --- </Option>
-            <Option>Entrée</Option>
-            <Option>Sortie</Option>
+          <Select name="type" value={entry.type} onChange={handleChange}>
+            <Option value=""> --- </Option>
+            <Option value="in">Entrée</Option>
+            <Option value="out">Sortie</Option>
           </Select>
         </Wrapper>
         <Wrapper>
-          <Text placeholder="motifs" />
+          <Text
+            placeholder="motifs"
+            name="motifs"
+            value={entry.motifs}
+            onChange={handleChange}
+          />
         </Wrapper>
         <Validation>Valider</Validation>
       </Form>
