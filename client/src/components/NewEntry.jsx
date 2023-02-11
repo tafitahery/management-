@@ -58,7 +58,7 @@ const Text = styled.textarea`
   background-color: #eeeeee;
   resize: none;
   width: 200px;
-  height: 50px;
+  height: 40px;
   border: none;
   font-size: 14px;
   &:focus {
