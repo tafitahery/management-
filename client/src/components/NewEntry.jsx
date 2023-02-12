@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+
+import { AppContext } from '../context/context';
 
 const Container = styled.div`
   display: flex;
@@ -81,11 +83,7 @@ const Validation = styled.button`
 `;
 
 export default function NewEntry() {
-  const [entry, setEntry] = useState({
-    amount: 0,
-    type: '',
-    motifs: '',
-  });
+  const { entry, setEntry } = useContext(AppContext);
 
   const handleChange = (e) => {
     setEntry((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -93,9 +91,13 @@ export default function NewEntry() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const date = Date.now();
+    const data = {
+      ...entry,
+      amount: parseInt(entry.amount),
+      date: Date.now(),
+    };
     try {
-      await axios.post('http://localhost:5000/amounts', { ...entry, date });
+      await axios.post('http://localhost:5000/amounts', data);
       setEntry({ amount: 0, type: '', motifs: '' });
     } catch (error) {
       console.log(error);

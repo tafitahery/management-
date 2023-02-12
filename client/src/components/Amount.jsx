@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+
+import { AppContext } from '../context/context';
 
 import Card from './Card';
 
@@ -11,11 +13,20 @@ const Container = styled.div`
 `;
 
 export default function Amount() {
+  const { amounts } = useContext(AppContext);
+
+  const total = (type) => {
+    return amounts?.reduce(
+      (sum, item) => (type === item.type ? (sum += item.amount) : sum),
+      0
+    );
+  };
+
   return (
     <Container>
-      <Card label="Entrée" amount={2000} />
-      <Card label="Sortie" amount={500} />
-      <Card label="Profit" amount={1500} />
+      <Card label="Entrée" amount={total('in')} />
+      <Card label="Sortie" amount={total('out')} />
+      <Card label="Profit" amount={total('in') - total('out')} />
     </Container>
   );
 }
