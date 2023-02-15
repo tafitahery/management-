@@ -1,11 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BsFillCaretDownFill } from 'react-icons/bs';
 
 const Container = styled.div`
   flex: 1;
-  margin: 0px 60px 0px 30px;
   padding: 10px;
+  margin: 0 30px;
   height: 50px;
   border-radius: 10px;
   display: flex;
@@ -22,26 +21,23 @@ const Label = styled.div`
 `;
 
 const Amount = styled.div`
-  font-size: 32px;
+  font-size: 26px;
   font-weight: 500;
-  margin-left: 50px;
+  margin-left: 30px;
   display: flex;
   align-items: center;
   justify-content: space-around;
-`;
 
-const Icon = styled(BsFillCaretDownFill)`
-  font-size: 24px;
-  color: red;
+  ${({ label, amount }) =>
+    label === 'Profit' && (amount < 0 ? 'color: red;' : 'color: green')}
 `;
 
 export default function Card({ label, amount }) {
   return (
     <Container>
       <Label>{label}</Label>
-      <Amount>
+      <Amount label={label} amount={amount}>
         {amount} Ar
-        <Icon />
       </Amount>
     </Container>
   );

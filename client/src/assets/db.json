@@ -1,74 +1,18 @@
 {
   "amounts": [
     {
-      "amount": 5000,
-      "type": "in",
-      "motifs": "Vente",
-      "date": 1676186021686,
+      "amount": 2000,
+      "type": "out",
+      "motifs": "Achat",
+      "date": 1676470479583,
       "id": 1
     },
     {
-      "amount": 2000,
-      "type": "out",
-      "motifs": "achat",
-      "date": 1676186103255,
-      "id": 2
-    },
-    {
-      "amount": 2000,
-      "type": "in",
-      "motifs": "vente",
-      "date": 1676186125230,
-      "id": 3
-    },
-    {
-      "amount": 1000,
-      "type": "out",
-      "motifs": "achat",
-      "date": 1676186216768,
-      "id": 4
-    },
-    {
-      "amount": 2000,
+      "amount": 5000,
       "type": "in",
       "motifs": "Vente",
-      "date": 1676186780054,
-      "id": 5
-    },
-    {
-      "amount": 2000,
-      "type": "out",
-      "motifs": "achat",
-      "date": 1676186899866,
-      "id": 6
-    },
-    {
-      "amount": 10000,
-      "type": "in",
-      "motifs": "Vente 5kg quartz",
-      "date": 1676194329905,
-      "id": 7
-    },
-    {
-      "amount": 1200,
-      "type": "out",
-      "motifs": "Achat matériel",
-      "date": 1676203775637,
-      "id": 8
-    },
-    {
-      "amount": 2000,
-      "type": "out",
-      "motifs": "salaire employé",
-      "date": 1676203809188,
-      "id": 9
-    },
-    {
-      "amount": 3000,
-      "type": "in",
-      "motifs": "Manga",
-      "date": 1676212380275,
-      "id": 10
+      "date": 1676470551659,
+      "id": 2
     }
   ]
 }

@@ -5,6 +5,7 @@ import axios from 'axios';
 import { AppContext } from '../context/context';
 
 const Container = styled.div`
+  margin-top: 20px;
   display: flex;
   align-items: center;
   justify-content: center;

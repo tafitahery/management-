@@ -8,8 +8,16 @@ import Card from './Card';
 const Container = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   height: 120px;
   padding: 10px;
+`;
+
+const Wrapper = styled.div`
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 export default function Amount() {
@@ -24,9 +32,11 @@ export default function Amount() {
 
   return (
     <Container>
-      <Card label="Entrée" amount={total('in')} />
-      <Card label="Sortie" amount={total('out')} />
-      <Card label="Profit" amount={total('in') - total('out')} />
+      <Wrapper>
+        <Card label="Entrée" amount={total('in')} />
+        <Card label="Sortie" amount={total('out')} />
+        <Card label="Profit" amount={total('in') - total('out')} />
+      </Wrapper>
     </Container>
   );
 }

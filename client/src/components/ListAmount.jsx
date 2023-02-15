@@ -1,52 +1,66 @@
 import React, { useContext } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { BsFillCaretDownFill, BsFillCaretUpFill } from 'react-icons/bs';
 
 import { AppContext } from '../context/context';
 
 const Container = styled.div`
-  margin: 20px 100px;
+  margin: auto;
   display: flex;
   flex-direction: column;
+  width: 60%;
 `;
 
 const Options = styled.div``;
 
 const Table = styled.table`
+  border-collapse: collapse;
+  border-radius: 10px;
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  height: 280px;
   -webkit-box-shadow: 0px 4px 12px -1px rgba(0, 0, 0, 0.33);
   box-shadow: 0px 4px 12px -1px rgba(0, 0, 0, 0.33);
 `;
 
-const Tr = styled.tr``;
+const Thead = styled.thead``;
+
+const Tbody = styled.tbody`
+  overflow-y: auto;
+  overflow-x: hidden;
+`;
+
+const Tr = styled.tr`
+  ${({ content }) =>
+    content &&
+    css`
+      &:hover {
+        background-color: lightgray;
+        color: white;
+      }
+    `}
+`;
 
 const Th = styled.th`
   border-bottom: 2px solid gray;
   font-size: 18px;
   color: gray;
-  width: 50px;
+  width: 250px;
+
+  ${({ sm }) => sm && 'width: 150px;'}
 `;
 
 const Td = styled.td`
   padding: 10px;
-  text-align: center;
   cursor: pointer;
-  background-color: lightgray;
-  border-radius: 5px;
+  width: 250px;
 
-  ${(props) => props.color && 'color: white;'}
-  ${(props) =>
-    props.color &&
-    (props.color === 'in'
-      ? 'background-color: lightgreen;'
-      : 'background-color: tomato;')}
+  ${({ color }) => color && 'text-align: center; width: 150px;'}
+  ${({ color }) => color && (color === 'in' ? 'color: green;' : 'color: red')}
   ${(props) =>
     props.amount &&
-    `display : flex; align-items: center; justify-content: center;`}
-
-  &:hover {
-    background-color: gray;
-    color: white;
-  }
+    `display : flex; align-items: center; justify-content: center; width: 150px;`}
 `;
 
 const IconUp = styled(BsFillCaretUpFill)`
@@ -76,19 +90,19 @@ export default function ListAmount() {
     <Container>
       <Options></Options>
       <Table>
-        <thead>
+        <Thead>
           <Tr>
             <Th>Date</Th>
-            <Th>Type</Th>
-            <Th>Montant (Ar)</Th>
+            <Th sm>Type</Th>
+            <Th sm>Montant (Ar)</Th>
             <Th>Motifs</Th>
           </Tr>
-        </thead>
-        <tbody>
+        </Thead>
+        <Tbody>
           {amounts
             ?.sort((a, b) => b.date - a.date)
             .map((item) => (
-              <Tr key={item.id}>
+              <Tr key={item.id} content>
                 <Td>{formatDate(item.date)}</Td>
                 <Td color={item.type}>
                   {item.type === 'in' ? 'Entrée' : 'Sortie'}
@@ -99,7 +113,7 @@ export default function ListAmount() {
                 <Td>{item.motifs}</Td>
               </Tr>
             ))}
-        </tbody>
+        </Tbody>
       </Table>
     </Container>
   );

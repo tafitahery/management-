@@ -9,8 +9,8 @@ export default function Management() {
   return (
     <div>
       <Topbar />
-      <Amount />
       <NewEntry />
+      <Amount />
       <ListAmount />
     </div>
   );
