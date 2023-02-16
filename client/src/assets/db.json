@@ -27,6 +27,13 @@
       "motifs": "Salaire",
       "date": 1676549372993,
       "id": 4
+    },
+    {
+      "date": 1676419200000,
+      "amount": 2000,
+      "type": "in",
+      "motifs": "Vente",
+      "id": 5
     }
   ]
 }
