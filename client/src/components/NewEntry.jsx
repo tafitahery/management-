@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 
@@ -9,6 +9,8 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  height: 70px;
 `;
 
 const Form = styled.form`
@@ -20,7 +22,7 @@ const Form = styled.form`
 
 const Wrapper = styled.div`
   background-color: #eeeeee;
-  padding: 10px;
+  padding: 5px;
   display: flex;
   align-items: center;
   border-radius: 10px;
@@ -83,8 +85,16 @@ const Validation = styled.button`
   cursor: pointer;
 `;
 
+const Error = styled.div`
+  color: red;
+  font-size: 12px;
+  margin-top: 10px;
+  width: 13px;
+`;
+
 export default function NewEntry() {
   const { entry, setEntry } = useContext(AppContext);
+  const [error, setError] = useState(false);
 
   const handleChange = (e) => {
     setEntry((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -92,6 +102,10 @@ export default function NewEntry() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!entry.amount || !entry.type) {
+      setError(true);
+      return;
+    }
     const data = {
       ...entry,
       amount: parseInt(entry.amount),
@@ -100,6 +114,7 @@ export default function NewEntry() {
     try {
       await axios.post('http://localhost:5000/amounts', data);
       setEntry({ amount: 0, type: '', motifs: '' });
+      setError(false);
     } catch (error) {
       console.log(error);
     }
@@ -135,6 +150,7 @@ export default function NewEntry() {
         </Wrapper>
         <Validation>Valider</Validation>
       </Form>
+      {error && <Error>Merci de bien remplir le formulaire</Error>}
     </Container>
   );
 }
