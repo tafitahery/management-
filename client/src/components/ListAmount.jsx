@@ -8,7 +8,7 @@ const Container = styled.div`
   margin: auto;
   display: flex;
   flex-direction: column;
-  width: 60%;
+  width: 50%;
 `;
 
 const Options = styled.div``;
@@ -46,7 +46,7 @@ const Th = styled.th`
   border-bottom: 2px solid gray;
   font-size: 18px;
   color: gray;
-  width: 250px;
+  width: 200px;
 
   ${({ sm }) => sm && 'width: 150px;'}
 `;
@@ -54,9 +54,10 @@ const Th = styled.th`
 const Td = styled.td`
   padding: 10px;
   cursor: pointer;
-  width: 250px;
+  width: 200px;
+  text-align: center;
 
-  ${({ color }) => color && 'text-align: center; width: 150px;'}
+  ${({ color }) => color && 'width: 150px;'}
   ${({ color }) => color && (color === 'in' ? 'color: green;' : 'color: red')}
   ${(props) =>
     props.amount &&
@@ -81,8 +82,6 @@ export default function ListAmount() {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
     });
   };
 

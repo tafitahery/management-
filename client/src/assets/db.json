@@ -1,39 +1,32 @@
 {
   "amounts": [
     {
-      "amount": 2000,
-      "type": "out",
-      "motifs": "Achat",
-      "date": 1676470479583,
+      "date": 1676548466606,
+      "amount": 1200,
+      "type": "in",
+      "motifs": "Vente",
       "id": 1
     },
     {
-      "amount": 5000,
-      "type": "in",
-      "motifs": "Vente",
-      "date": 1676470551659,
+      "amount": 500,
+      "type": "out",
+      "motifs": "Achat",
+      "date": 1676548482705,
       "id": 2
     },
     {
-      "amount": 2000,
+      "date": 1676549350462,
+      "amount": 5000,
       "type": "in",
-      "motifs": "",
-      "date": 1676527054236,
+      "motifs": "Vente",
       "id": 3
     },
     {
-      "amount": 2000,
-      "type": "in",
-      "motifs": "Vente",
-      "date": 1676527637519,
-      "id": 4
-    },
-    {
-      "amount": 5000,
+      "amount": 3000,
       "type": "out",
-      "motifs": "Achat",
-      "date": 1676527902572,
-      "id": 5
+      "motifs": "Salaire",
+      "date": 1676549372993,
+      "id": 4
     }
   ]
 }

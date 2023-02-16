@@ -10,11 +10,10 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 70px;
 `;
 
 const Form = styled.form`
-  width: 50%;
+  width: 65%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -22,7 +21,7 @@ const Form = styled.form`
 
 const Wrapper = styled.div`
   background-color: #eeeeee;
-  padding: 5px;
+  padding: 5px 15px;
   display: flex;
   align-items: center;
   border-radius: 10px;
@@ -31,9 +30,12 @@ const Wrapper = styled.div`
 const Input = styled.input`
   background-color: #eeeeee;
   padding: 10px 0;
-  width: 120px;
+  width: 125px;
   border: none;
   font-size: 18px;
+
+  ${({ motifs }) => motifs && 'width: 200px;'}
+
   &:focus {
     outline: none;
   }
@@ -60,21 +62,6 @@ const Option = styled.option`
   color: gray;
 `;
 
-const Text = styled.textarea`
-  background-color: #eeeeee;
-  resize: none;
-  width: 200px;
-  height: 40px;
-  border: none;
-  font-size: 14px;
-  &:focus {
-    outline: none;
-  }
-  &:placeholder-shown {
-    font-size: 24px;
-  }
-`;
-
 const Validation = styled.button`
   background-color: teal;
   border: none;
@@ -89,12 +76,20 @@ const Error = styled.div`
   color: red;
   font-size: 12px;
   margin-top: 10px;
-  width: 13px;
+  height: 13px;
 `;
 
 export default function NewEntry() {
   const { entry, setEntry } = useContext(AppContext);
   const [error, setError] = useState(false);
+
+  const formatCalendarDate = (date) => {
+    const year = new Date(date).getFullYear();
+    const month = new Date(date).getMonth() + 1;
+    const stringMonth = month < 10 ? '0' + month : month;
+    const day = new Date(date).getDate();
+    return `${year}-${stringMonth}-${day}`;
+  };
 
   const handleChange = (e) => {
     setEntry((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -109,11 +104,11 @@ export default function NewEntry() {
     const data = {
       ...entry,
       amount: parseInt(entry.amount),
-      date: Date.now(),
+      date: new Date(entry.date).getTime(),
     };
     try {
       await axios.post('http://localhost:5000/amounts', data);
-      setEntry({ amount: 0, type: '', motifs: '' });
+      setEntry({ amount: 0, type: '', motifs: '', date: Date.now() });
       setError(false);
     } catch (error) {
       console.log(error);
@@ -123,6 +118,14 @@ export default function NewEntry() {
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
+        <Wrapper>
+          <Input
+            type="date"
+            name="date"
+            value={formatCalendarDate(entry.date)}
+            onChange={handleChange}
+          />
+        </Wrapper>
         <Wrapper>
           <Input
             type="number"
@@ -141,9 +144,11 @@ export default function NewEntry() {
           </Select>
         </Wrapper>
         <Wrapper>
-          <Text
-            placeholder="motifs"
+          <Input
+            type="text"
             name="motifs"
+            motifs
+            placeholder="motifs"
             value={entry.motifs}
             onChange={handleChange}
           />

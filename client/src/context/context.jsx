@@ -5,6 +5,7 @@ const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
   const [entry, setEntry] = useState({
+    date: Date.now(),
     amount: 0,
     type: '',
     motifs: '',
