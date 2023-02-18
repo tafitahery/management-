@@ -10,22 +10,53 @@ const AppProvider = ({ children }) => {
     type: '',
     motifs: '',
   });
-  const [amounts, setAmounts] = useState([]);
+  const [account, setAccount] = useState({
+    name: '',
+    amounts: [],
+  });
+  const [selectAccount, setSelectAccount] = useState('');
+  const [accounts, setAccounts] = useState([]);
+  const [accountSelected, setAccountSelected] = useState({});
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchAccounts = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/amounts');
-        setAmounts(data);
+        const { data } = await axios.get('http://localhost:5000/accounts');
+        setAccounts(data);
       } catch (error) {
         console.log(error);
       }
     };
-    fetchData();
-  }, [entry]);
+    fetchAccounts();
+  }, [account]);
+
+  useEffect(() => {
+    const getAccountById = async () => {
+      try {
+        const { data } = await axios.get(
+          'http://localhost:5000/accounts/' + selectAccount
+        );
+        setAccountSelected(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getAccountById();
+  }, [selectAccount, entry]);
 
   return (
-    <AppContext.Provider value={{ entry, setEntry, amounts }}>
+    <AppContext.Provider
+      value={{
+        entry,
+        setEntry,
+        account,
+        setAccount,
+        selectAccount,
+        accountSelected,
+        setSelectAccount,
+        accounts,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );

@@ -58,7 +58,7 @@ const Td = styled.td`
   text-align: center;
 
   ${({ color }) => color && 'width: 150px;'}
-  ${({ color }) => color && (color === 'in' ? 'color: green;' : 'color: red')}
+  ${({ color }) => color && (color === 'in' ? 'color: green;' : 'color: red;')}
   ${(props) =>
     props.amount &&
     `display : flex; align-items: center; justify-content: center; width: 150px;`}

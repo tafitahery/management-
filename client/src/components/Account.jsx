@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { BsPlusLg } from 'react-icons/bs';
 import { BsCheckLg } from 'react-icons/bs';
+import { AppContext } from '../context/context';
+import axios from 'axios';
 
 const Container = styled.div`
   height: 60px;
@@ -21,7 +23,7 @@ const Wrapper = styled.div`
   box-shadow: 0px 4px 12px -1px rgba(0, 0, 0, 0.33);
 `;
 
-const SelectAcount = styled.div`
+const SelectAccount = styled.div`
   flex: 1;
   height: 100%;
   display: flex;
@@ -75,24 +77,68 @@ const Title = styled.h1`
 `;
 
 export default function Account() {
+  const [title, setTitle] = useState('Nouveau compte');
+
+  const {
+    accounts,
+    account,
+    setAccount,
+    selectAccount,
+    setSelectAccount,
+    accountSelected,
+  } = useContext(AppContext);
+
+  const handleSetName = (e) => {
+    setAccount((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleAddAccount = async () => {
+    try {
+      await axios.post('http://localhost:5000/accounts', {
+        ...account,
+        name: account.name,
+      });
+      setAccount({ ...account, name: '' });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSelectAccount = async (id) => {
+    setTitle(accountSelected.name);
+  };
+
   return (
     <Container>
       <Wrapper>
-        <SelectAcount>
+        <SelectAccount>
           <AccountWrapper>
-            <Input type="text" placeholder="Nouveau compte" autoFocus />
-            <AddIcon />
+            <Input
+              type="text"
+              name="name"
+              placeholder="Nouveau compte"
+              autoFocus
+              value={account.name}
+              onChange={handleSetName}
+            />
+            <AddIcon onClick={handleAddAccount} />
           </AccountWrapper>
           <AccountWrapper>
-            <Select>
-              <Option>Selectioner un compte</Option>
-              <Option>1</Option>
-              <Option>2</Option>
+            <Select
+              value={selectAccount}
+              onChange={(e) => setSelectAccount(e.target.value)}
+            >
+              <Option value="">Selectioner un compte</Option>
+              {accounts?.map((account) => (
+                <Option key={account.id} value={account.id}>
+                  {account.name}
+                </Option>
+              ))}
             </Select>
-            <CheckIcon />
+            <CheckIcon onClick={() => handleSelectAccount(selectAccount)} />
           </AccountWrapper>
-        </SelectAcount>
-        <Title>Nouvel Enregistrement</Title>
+        </SelectAccount>
+        <Title>{title}</Title>
       </Wrapper>
     </Container>
   );

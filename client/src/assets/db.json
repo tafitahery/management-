@@ -1,39 +1,40 @@
 {
-  "amounts": [
+  "accounts": [
     {
-      "date": 1676548466606,
-      "amount": 1200,
-      "type": "in",
-      "motifs": "Vente",
+      "name": "Bizina",
+      "amounts": [
+        {
+          "amount": 3000,
+          "type": "out",
+          "motifs": "Achat",
+          "date": 1676726589287
+        },
+        {
+          "amount": 5000,
+          "type": "in",
+          "motifs": "Vente",
+          "date": 1676726617753
+        }
+      ],
       "id": 1
     },
     {
-      "amount": 500,
-      "type": "out",
-      "motifs": "Achat",
-      "date": 1676548482705,
+      "name": "test",
+      "amounts": [
+        {
+          "amount": 6000,
+          "type": "out",
+          "motifs": "Salaire",
+          "date": 1676726822545
+        },
+        {
+          "date": 1676728791498,
+          "amount": 5000,
+          "type": "in",
+          "motifs": "Vente"
+        }
+      ],
       "id": 2
-    },
-    {
-      "date": 1676549350462,
-      "amount": 5000,
-      "type": "in",
-      "motifs": "Vente",
-      "id": 3
-    },
-    {
-      "amount": 3000,
-      "type": "out",
-      "motifs": "Salaire",
-      "date": 1676549372993,
-      "id": 4
-    },
-    {
-      "date": 1676419200000,
-      "amount": 2000,
-      "type": "in",
-      "motifs": "Vente",
-      "id": 5
     }
   ]
 }

@@ -80,7 +80,8 @@ const Error = styled.div`
 `;
 
 export default function NewEntry() {
-  const { entry, setEntry } = useContext(AppContext);
+  const { entry, setEntry, selectAccount, accountSelected } =
+    useContext(AppContext);
   const [error, setError] = useState(false);
 
   const formatCalendarDate = (date) => {
@@ -107,7 +108,10 @@ export default function NewEntry() {
       date: new Date(entry.date).getTime(),
     };
     try {
-      await axios.post('http://localhost:5000/amounts', data);
+      await axios.put('http://localhost:5000/accounts/' + selectAccount, {
+        ...accountSelected,
+        amounts: [...accountSelected.amounts, data],
+      });
       setEntry({ amount: 0, type: '', motifs: '', date: Date.now() });
       setError(false);
     } catch (error) {
