@@ -135,13 +135,19 @@ export default function NewEntry() {
             type="number"
             name="amount"
             autoFocus
+            required
             value={entry.amount}
             onChange={handleChange}
           />
           <Currency>Ar</Currency>
         </Wrapper>
         <Wrapper>
-          <Select name="type" value={entry.type} onChange={handleChange}>
+          <Select
+            name="type"
+            value={entry.type}
+            onChange={handleChange}
+            required
+          >
             <Option value=""> --- </Option>
             <Option value="in">Entrée</Option>
             <Option value="out">Sortie</Option>
