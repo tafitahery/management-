@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { BsPlusLg } from 'react-icons/bs';
 import { AppContext } from '../context/context';
 import axios from 'axios';
@@ -62,9 +62,29 @@ const Button = styled.button`
   border: none;
   cursor: pointer;
   transition: all 0.5s ease;
+
   &:hover {
     background-color: teal;
   }
+  ${({ del }) =>
+    del &&
+    `
+    margin-left: 10px;
+    background-color: transparent;
+    color: red;
+    width: 25px;
+    height: 25px;
+    `}
+  ${({ del }) =>
+    del &&
+    css`
+      &:hover {
+        background-color: red;
+        color: white;
+        font-size: 18px;
+        font-weight: 600;
+      }
+    `}
 `;
 
 const AddIcon = styled(BsPlusLg)`
@@ -86,6 +106,8 @@ const Option = styled.option``;
 
 const Title = styled.h1`
   flex: 1;
+  display: flex;
+  align-items: center;
   font-weight: 400;
   color: teal;
 `;
@@ -126,6 +148,15 @@ export default function Account() {
     }
   };
 
+  const handleDelete = async () => {
+    try {
+      await axios.delete('http://localhost:5000/accounts/' + selectAccount);
+      setSelectAccount('');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Container>
       <Wrapper>
@@ -136,7 +167,7 @@ export default function Account() {
                 type="text"
                 name="name"
                 placeholder="Nouveau compte"
-                autoFocus
+                required
                 value={account.name}
                 onChange={handleSetName}
               />
@@ -159,7 +190,14 @@ export default function Account() {
             </Select>
           </AccountWrapper>
         </SelectAccount>
-        <Title>{title}</Title>
+        {title && (
+          <Title>
+            {title}{' '}
+            <Button del onClick={handleDelete}>
+              X
+            </Button>
+          </Title>
+        )}
       </Wrapper>
     </Container>
   );

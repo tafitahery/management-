@@ -28,7 +28,7 @@ const AppProvider = ({ children }) => {
       }
     };
     fetchAccounts();
-  }, [account]);
+  }, [account, selectAccount]);
 
   useEffect(() => {
     const getAccountById = async () => {

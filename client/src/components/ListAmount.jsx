@@ -65,7 +65,7 @@ const Td = styled.td`
     `display : flex; align-items: center; justify-content: center; width: 150px;`}
   ${({ del }) =>
     del &&
-    'position: absolute; width: 30px; color: red; transition: all 0.25s ease;'}
+    'position: absolute; width: 30px; color: red; transition: all 0.25s ease; border-radius: 0 10px 10px 0;'}
   ${({ del }) =>
     del &&
     css`
