@@ -98,7 +98,7 @@ export default function NewEntry() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!entry.amount || !entry.type) {
+    if (!entry.amount || !entry.type || !selectAccount) {
       setError(true);
       return;
     }
@@ -159,7 +159,12 @@ export default function NewEntry() {
         </Wrapper>
         <Validation>Valider</Validation>
       </Form>
-      {error && <Error>Merci de bien remplir le formulaire</Error>}
+      {error && (
+        <Error>
+          Merci de bien selectionner un compte et de remplir correctement le
+          formulaire
+        </Error>
+      )}
     </Container>
   );
 }

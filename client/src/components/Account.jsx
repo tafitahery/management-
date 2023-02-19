@@ -60,10 +60,14 @@ const Button = styled.button`
   background-color: gray;
   border-radius: 60px;
   border: none;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  &:hover {
+    background-color: teal;
+  }
 `;
 
 const AddIcon = styled(BsPlusLg)`
-  cursor: pointer;
   color: white;
 `;
 
@@ -108,6 +112,9 @@ export default function Account() {
 
   const handleAddAccount = async (e) => {
     e.preventDefault();
+    if (!account.name) {
+      return;
+    }
     try {
       await axios.post('http://localhost:5000/accounts', {
         ...account,

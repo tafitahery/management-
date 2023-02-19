@@ -32,6 +32,7 @@ const Tbody = styled.tbody`
 `;
 
 const Tr = styled.tr`
+  transition: all 0.25s ease;
   ${({ normal }) =>
     normal &&
     css`
@@ -62,6 +63,17 @@ const Td = styled.td`
   ${(props) =>
     props.amount &&
     `display : flex; align-items: center; justify-content: center; width: 150px;`}
+  ${({ del }) =>
+    del &&
+    'position: absolute; width: 30px; color: red; transition: all 0.25s ease;'}
+  ${({ del }) =>
+    del &&
+    css`
+      &:hover {
+        color: white;
+        background-color: red;
+      }
+    `}
 `;
 
 const IconUp = styled(BsFillCaretUpFill)`
@@ -110,6 +122,7 @@ export default function ListAmount() {
                   {item.amount} {item.type === 'in' ? <IconUp /> : <IconDown />}
                 </Td>
                 <Td>{item.motifs}</Td>
+                <Td del>X</Td>
               </Tr>
             ))}
         </Tbody>
