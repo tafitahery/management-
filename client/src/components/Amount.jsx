@@ -21,10 +21,10 @@ const Wrapper = styled.div`
 `;
 
 export default function Amount() {
-  const { amounts } = useContext(AppContext);
+  const { accountSelected } = useContext(AppContext);
 
   const total = (type) => {
-    return amounts?.reduce(
+    return accountSelected.amounts?.reduce(
       (sum, item) => (type === item.type ? (sum += item.amount) : sum),
       0
     );
@@ -33,9 +33,12 @@ export default function Amount() {
   return (
     <Container>
       <Wrapper>
-        <Card label="Entrée" amount={total('in')} />
-        <Card label="Sortie" amount={total('out')} />
-        <Card label="Profit" amount={total('in') - total('out')} />
+        <Card label="Entrée" amount={total('in') ? total('in') : 0} />
+        <Card label="Sortie" amount={total('out') ? total('out') : 0} />
+        <Card
+          label="Profit"
+          amount={total('in') - total('out') ? total('in') - total('out') : 0}
+        />
       </Wrapper>
     </Container>
   );

@@ -32,8 +32,8 @@ const Tbody = styled.tbody`
 `;
 
 const Tr = styled.tr`
-  ${({ content }) =>
-    content &&
+  ${({ normal }) =>
+    normal &&
     css`
       &:hover {
         background-color: lightgray;
@@ -75,7 +75,7 @@ const IconDown = styled(BsFillCaretDownFill)`
 `;
 
 export default function ListAmount() {
-  const { amounts } = useContext(AppContext);
+  const { accountSelected } = useContext(AppContext);
 
   const formatDate = (date) => {
     return new Date(date).toLocaleDateString('fr-FR', {
@@ -98,10 +98,10 @@ export default function ListAmount() {
           </Tr>
         </Thead>
         <Tbody>
-          {amounts
+          {accountSelected.amounts
             ?.sort((a, b) => b.date - a.date)
             .map((item) => (
-              <Tr key={item.id} content>
+              <Tr key={item.date} normal>
                 <Td>{formatDate(item.date)}</Td>
                 <Td color={item.type}>
                   {item.type === 'in' ? 'Entrée' : 'Sortie'}

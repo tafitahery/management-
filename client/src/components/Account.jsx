@@ -1,7 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { BsPlusLg } from 'react-icons/bs';
-import { BsCheckLg } from 'react-icons/bs';
 import { AppContext } from '../context/context';
 import axios from 'axios';
 
@@ -37,6 +36,12 @@ const AccountWrapper = styled.div`
   align-items: center;
 `;
 
+const Form = styled.form`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 const Input = styled.input`
   padding: 1px;
   width: 200px;
@@ -48,9 +53,18 @@ const Input = styled.input`
   }
 `;
 
+const Button = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: gray;
+  border-radius: 60px;
+  border: none;
+`;
+
 const AddIcon = styled(BsPlusLg)`
   cursor: pointer;
-  color: gray;
+  color: white;
 `;
 
 const Select = styled.select`
@@ -64,20 +78,16 @@ const Select = styled.select`
   }
 `;
 
-const CheckIcon = styled(BsCheckLg)`
-  cursor: pointer;
-  color: gray;
-`;
-
 const Option = styled.option``;
 
 const Title = styled.h1`
   flex: 1;
   font-weight: 400;
+  color: teal;
 `;
 
 export default function Account() {
-  const [title, setTitle] = useState('Nouveau compte');
+  const [title, setTitle] = useState('');
 
   const {
     accounts,
@@ -88,11 +98,16 @@ export default function Account() {
     accountSelected,
   } = useContext(AppContext);
 
+  useEffect(() => {
+    setTitle(accountSelected.name);
+  }, [accountSelected]);
+
   const handleSetName = (e) => {
     setAccount((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleAddAccount = async () => {
+  const handleAddAccount = async (e) => {
+    e.preventDefault();
     try {
       await axios.post('http://localhost:5000/accounts', {
         ...account,
@@ -104,24 +119,24 @@ export default function Account() {
     }
   };
 
-  const handleSelectAccount = async (id) => {
-    setTitle(accountSelected.name);
-  };
-
   return (
     <Container>
       <Wrapper>
         <SelectAccount>
           <AccountWrapper>
-            <Input
-              type="text"
-              name="name"
-              placeholder="Nouveau compte"
-              autoFocus
-              value={account.name}
-              onChange={handleSetName}
-            />
-            <AddIcon onClick={handleAddAccount} />
+            <Form onSubmit={handleAddAccount}>
+              <Input
+                type="text"
+                name="name"
+                placeholder="Nouveau compte"
+                autoFocus
+                value={account.name}
+                onChange={handleSetName}
+              />
+              <Button>
+                <AddIcon />
+              </Button>
+            </Form>
           </AccountWrapper>
           <AccountWrapper>
             <Select
@@ -135,7 +150,6 @@ export default function Account() {
                 </Option>
               ))}
             </Select>
-            <CheckIcon onClick={() => handleSelectAccount(selectAccount)} />
           </AccountWrapper>
         </SelectAccount>
         <Title>{title}</Title>
