@@ -4,10 +4,10 @@
       "name": "Tsena",
       "amounts": [
         {
-          "date": 1676971822690,
-          "amount": 5000,
-          "type": "out",
-          "motifs": "Achat"
+          "amount": 3000,
+          "type": "in",
+          "motifs": "Vente",
+          "date": 1677053329740
         }
       ],
       "id": 2
@@ -16,6 +16,18 @@
       "name": "Bizina",
       "amounts": [],
       "id": 3
+    },
+    {
+      "name": "test",
+      "amounts": [
+        {
+          "date": 1677053145671,
+          "amount": 5000,
+          "type": "in",
+          "motifs": "Vente"
+        }
+      ],
+      "id": 4
     }
   ]
 }

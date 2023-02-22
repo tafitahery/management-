@@ -42,7 +42,7 @@ const AppProvider = ({ children }) => {
       }
     };
     getAccountById();
-  }, [selectAccount, entry]);
+  }, [selectAccount, entry, account]);
 
   return (
     <AppContext.Provider

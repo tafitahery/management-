@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import { BsFillCaretDownFill, BsFillCaretUpFill } from 'react-icons/bs';
 
 import { AppContext } from '../context/context';
+import axios from 'axios';
 
 const Container = styled.div`
   margin: auto;
@@ -65,7 +66,12 @@ const Td = styled.td`
     `display : flex; align-items: center; justify-content: center; width: 150px;`}
   ${({ del }) =>
     del &&
-    'position: absolute; width: 30px; color: red; transition: all 0.25s ease; border-radius: 0 10px 10px 0;'}
+    `
+    position: absolute; 
+    width: 30px; color: red; 
+    transition: all 0.25s ease; 
+    border-radius: 0 10px 10px 0;
+    `}
   ${({ del }) =>
     del &&
     css`
@@ -87,7 +93,7 @@ const IconDown = styled(BsFillCaretDownFill)`
 `;
 
 export default function ListAmount() {
-  const { accountSelected } = useContext(AppContext);
+  const { accountSelected, setAccount } = useContext(AppContext);
 
   const formatDate = (date) => {
     return new Date(date).toLocaleDateString('fr-FR', {
@@ -95,6 +101,21 @@ export default function ListAmount() {
       month: 'long',
       day: 'numeric',
     });
+  };
+
+  const handleDelete = async (date) => {
+    const removeElement = accountSelected.amounts.filter(
+      (item) => item.date !== date
+    );
+    try {
+      await axios.put('http://localhost:5000/accounts/' + accountSelected.id, {
+        ...accountSelected,
+        amounts: removeElement,
+      });
+      setAccount({ name: '', amounts: [] });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -122,7 +143,9 @@ export default function ListAmount() {
                   {item.amount} {item.type === 'in' ? <IconUp /> : <IconDown />}
                 </Td>
                 <Td>{item.motifs}</Td>
-                <Td del>X</Td>
+                <Td del onClick={() => handleDelete(item.date)}>
+                  X
+                </Td>
               </Tr>
             ))}
         </Tbody>
