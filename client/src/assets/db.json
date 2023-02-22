@@ -1,16 +1,21 @@
 {
   "accounts": [
     {
-      "name": "Bizina",
+      "name": "Tsena",
       "amounts": [
         {
-          "amount": 0,
-          "type": "in",
-          "motifs": "",
-          "date": 1676817247215
+          "date": 1676971822690,
+          "amount": 5000,
+          "type": "out",
+          "motifs": "Achat"
         }
       ],
-      "id": 1
+      "id": 2
+    },
+    {
+      "name": "Bizina",
+      "amounts": [],
+      "id": 3
     }
   ]
 }

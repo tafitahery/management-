@@ -85,10 +85,29 @@ const Button = styled.button`
         font-weight: 600;
       }
     `}
+      
+  ${({ disabled }) =>
+    disabled &&
+    `
+    cursor: not-allowed;
+  `}
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      &:hover {
+        background-color: gray;
+      }
+    `}
 `;
 
 const AddIcon = styled(BsPlusLg)`
   color: white;
+`;
+
+const Error = styled.span`
+  margin-left: 10px;
+  font-size: 12px;
+  color: red;
 `;
 
 const Select = styled.select`
@@ -114,6 +133,7 @@ const Title = styled.h1`
 
 export default function Account() {
   const [title, setTitle] = useState('');
+  const [error, setError] = useState(false);
 
   const {
     accounts,
@@ -127,6 +147,14 @@ export default function Account() {
   useEffect(() => {
     setTitle(accountSelected.name);
   }, [accountSelected]);
+
+  useEffect(() => {
+    if (accounts.find((item) => item.name === account.name)) {
+      setError(true);
+    } else {
+      setError(false);
+    }
+  }, [account.name, accounts]);
 
   const handleSetName = (e) => {
     setAccount((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -171,10 +199,11 @@ export default function Account() {
                 value={account.name}
                 onChange={handleSetName}
               />
-              <Button>
+              <Button disabled={error}>
                 <AddIcon />
               </Button>
             </Form>
+            {error && <Error>Le compte existe deja</Error>}
           </AccountWrapper>
           <AccountWrapper>
             <Select
