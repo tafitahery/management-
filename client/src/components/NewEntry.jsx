@@ -112,7 +112,7 @@ export default function NewEntry() {
         ...accountSelected,
         amounts: [...accountSelected.amounts, data],
       });
-      setEntry({ amount: 0, type: '', motifs: '', date: Date.now() });
+      setEntry({ amount: '', type: '', motifs: '', date: Date.now() });
       setError(false);
     } catch (error) {
       console.log(error);
@@ -134,6 +134,7 @@ export default function NewEntry() {
           <Input
             type="number"
             name="amount"
+            placeholder="montant"
             autoFocus
             required
             value={entry.amount}

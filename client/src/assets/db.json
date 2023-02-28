@@ -1,33 +1,94 @@
 {
   "accounts": [
     {
-      "name": "Tsena",
+      "name": "Caisse1",
       "amounts": [
+        {
+          "date": 1677563578646,
+          "amount": 9000,
+          "type": "in",
+          "motifs": "DQFQDS"
+        },
+        {
+          "amount": 6576576,
+          "type": "in",
+          "motifs": "GJHKJHG",
+          "date": 1677562966928
+        },
+        {
+          "amount": 678900,
+          "type": "out",
+          "motifs": "HKJHJKJH",
+          "date": 1677562959009
+        },
+        {
+          "amount": 5000,
+          "type": "out",
+          "motifs": "TTUTRUYU",
+          "date": 1677562940662
+        },
+        {
+          "amount": 56565,
+          "type": "in",
+          "motifs": "RTR",
+          "date": 1677562854027
+        },
+        {
+          "date": 1677563788295,
+          "amount": 50000,
+          "type": "out",
+          "motifs": "DFQFSDF"
+        }
+      ],
+      "id": 1
+    },
+    {
+      "name": "Caisse 2",
+      "amounts": [
+        {
+          "date": 1677563641291,
+          "amount": 5000,
+          "type": "in",
+          "motifs": "SFQSFQ"
+        },
         {
           "amount": 3000,
           "type": "in",
-          "motifs": "Vente",
-          "date": 1677053329740
+          "motifs": "GFHGJGHJGHKH",
+          "date": 1677563131736
+        },
+        {
+          "amount": 5000,
+          "type": "out",
+          "motifs": "6000",
+          "date": 1677563120876
+        },
+        {
+          "amount": 600,
+          "type": "in",
+          "motifs": "FDCBCVBVN",
+          "date": 1677563110096
+        },
+        {
+          "amount": 65765876,
+          "type": "out",
+          "motifs": "FHGJGJHGJHGJ",
+          "date": 1677563097525
+        },
+        {
+          "amount": 6565465,
+          "type": "in",
+          "motifs": "TRYFTRYH RTY",
+          "date": 1677563013540
+        },
+        {
+          "date": 1677563834420,
+          "amount": 5000,
+          "type": "in",
+          "motifs": "TRYFTRYH RTY"
         }
       ],
       "id": 2
-    },
-    {
-      "name": "Bizina",
-      "amounts": [],
-      "id": 3
-    },
-    {
-      "name": "test",
-      "amounts": [
-        {
-          "date": 1677053145671,
-          "amount": 5000,
-          "type": "in",
-          "motifs": "Vente"
-        }
-      ],
-      "id": 4
     }
   ]
 }
