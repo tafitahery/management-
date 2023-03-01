@@ -9,7 +9,7 @@ const Container = styled.div`
   margin: auto;
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 55%;
 `;
 
 const Options = styled.div``;
@@ -49,8 +49,8 @@ const Th = styled.th`
   font-size: 18px;
   color: gray;
   width: 200px;
-
   ${({ sm }) => sm && 'width: 150px;'}
+  ${({ del }) => del && 'width: 50px;'}
 `;
 
 const Td = styled.td`
@@ -67,10 +67,8 @@ const Td = styled.td`
   ${({ del }) =>
     del &&
     `
-    position: absolute; 
     width: 30px; color: red; 
     transition: all 0.25s ease; 
-    border-radius: 0 10px 10px 0;
     `}
   ${({ del }) =>
     del &&
@@ -128,6 +126,7 @@ export default function ListAmount() {
             <Th sm>Type</Th>
             <Th sm>Montant (Ar)</Th>
             <Th>Motifs</Th>
+            <Th del></Th>
           </Tr>
         </Thead>
         <Tbody>
