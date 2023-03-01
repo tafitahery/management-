@@ -89,7 +89,8 @@ export default function NewEntry() {
     const month = new Date(date).getMonth() + 1;
     const stringMonth = month < 10 ? '0' + month : month;
     const day = new Date(date).getDate();
-    return `${year}-${stringMonth}-${day}`;
+    const stringDay = day < 10 ? '0' + day : day;
+    return `${year}-${stringMonth}-${stringDay}`;
   };
 
   const handleChange = (e) => {

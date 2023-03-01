@@ -4,6 +4,12 @@
       "name": "Caisse1",
       "amounts": [
         {
+          "date": 1677651543402,
+          "amount": 50000,
+          "type": "out",
+          "motifs": "dfsfd"
+        },
+        {
           "date": 1677563788295,
           "amount": 50000,
           "type": "out",
@@ -16,18 +22,6 @@
           "motifs": "DQFQDS"
         },
         {
-          "amount": 6576576,
-          "type": "in",
-          "motifs": "GJHKJHG",
-          "date": 1677562966928
-        },
-        {
-          "amount": 678900,
-          "type": "out",
-          "motifs": "HKJHJKJH",
-          "date": 1677562959009
-        },
-        {
           "amount": 5000,
           "type": "out",
           "motifs": "TTUTRUYU",
@@ -38,12 +32,6 @@
           "type": "in",
           "motifs": "RTR",
           "date": 1677562854027
-        },
-        {
-          "date": 1677651543402,
-          "amount": 50000,
-          "type": "out",
-          "motifs": "dfsfd"
         }
       ],
       "id": 1
