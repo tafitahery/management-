@@ -1,5 +1,7 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { AppContext } from '../context/context';
 
 const Container = styled.div`
   position: fixed;
@@ -8,7 +10,7 @@ const Container = styled.div`
   background-color: #000000b5;
   top: 0;
   left: 0;
-  display: flex;
+  ${({ show }) => (show ? `display: flex;` : `display: none;`)}
   align-items: center;
   justify-content: center;
   z-index: 9;
@@ -64,21 +66,95 @@ const Button = styled.button`
   ${({ valid }) => valid && `background-color: teal;`}
 `;
 
-export default function ModifyEntry() {
+export default function ModifyEntry({ show, setShow }) {
+  const { selectedDate, accountSelected, setAccount } = useContext(AppContext);
+
+  const [entry, setEntry] = useState({
+    date: '',
+    amount: '',
+    type: '',
+    motifs: '',
+  });
+
+  const editedAccount = accountSelected.amounts?.find(
+    (item) => item.date === selectedDate
+  );
+
+  useEffect(() => {
+    setEntry((prev) => ({ ...prev, ...editedAccount }));
+  }, [editedAccount]);
+
+  const formatCalendarDate = (date) => {
+    const year = new Date(date).getFullYear();
+    const month = new Date(date).getMonth() + 1;
+    const stringMonth = month < 10 ? '0' + month : month;
+    const day = new Date(date).getDate();
+    const stringDay = day < 10 ? '0' + day : day;
+    return `${year}-${stringMonth}-${stringDay}`;
+  };
+
+  const handleChange = (e) => {
+    setEntry((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const deletedAccount = accountSelected.amounts.filter(
+      (item) => item.date !== selectedDate
+    );
+    const accountEdit = [
+      ...deletedAccount,
+      {
+        ...entry,
+        date: new Date(entry.date).getTime(),
+        amount: parseInt(entry.amount),
+      },
+    ];
+    try {
+      await axios.put('http://localhost:5000/accounts/' + accountSelected.id, {
+        ...accountSelected,
+        amounts: accountEdit,
+      });
+      setAccount({ name: '', amounts: [] });
+      setShow(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <Container>
-      <Form>
+    <Container show={show}>
+      <Form onSubmit={handleSubmit}>
         <Title>Modification</Title>
-        <Input type="date" />
-        <Input type="number" placeholder="montant" />
-        <Select>
+        <Input
+          type="date"
+          name="date"
+          value={formatCalendarDate(entry.date)}
+          onChange={handleChange}
+        />
+        <Input
+          type="number"
+          name="amount"
+          placeholder="montant"
+          value={entry.amount}
+          onChange={handleChange}
+        />
+        <Select name="type" value={entry.type} onChange={handleChange}>
           <Option value=""> --- </Option>
           <Option value="in">Entrée</Option>
           <Option value="out">Sortie</Option>
         </Select>
-        <Input type="text" placeholder="motifs" />
+        <Input
+          type="text"
+          name="motifs"
+          placeholder="motifs"
+          value={entry.motifs}
+          onChange={handleChange}
+        />
         <Wrapper>
-          <Button del>Annuler</Button>
+          <Button type="button" del onClick={() => setShow(false)}>
+            Annuler
+          </Button>
           <Button valid>Valider</Button>
         </Wrapper>
       </Form>

@@ -90,8 +90,9 @@ const IconDown = styled(BsFillCaretDownFill)`
   margin-left: 5px;
 `;
 
-export default function ListAmount() {
-  const { accountSelected, setAccount } = useContext(AppContext);
+export default function ListAmount({ setShow }) {
+  const { accountSelected, setAccount, setSeletedDate } =
+    useContext(AppContext);
 
   const formatDate = (date) => {
     return new Date(date).toLocaleDateString('fr-FR', {
@@ -99,6 +100,11 @@ export default function ListAmount() {
       month: 'long',
       day: 'numeric',
     });
+  };
+
+  const handleEdit = (date) => {
+    setShow(true);
+    setSeletedDate(date);
   };
 
   const handleDelete = async (date) => {
@@ -134,14 +140,16 @@ export default function ListAmount() {
             ?.sort((a, b) => b.date - a.date)
             .map((item) => (
               <Tr key={item.date} normal>
-                <Td>{formatDate(item.date)}</Td>
-                <Td color={item.type}>
+                <Td onClick={() => handleEdit(item.date)}>
+                  {formatDate(item.date)}
+                </Td>
+                <Td color={item.type} onClick={() => handleEdit(item.date)}>
                   {item.type === 'in' ? 'Entrée' : 'Sortie'}
                 </Td>
-                <Td amount>
+                <Td amount onClick={() => handleEdit(item.date)}>
                   {item.amount} {item.type === 'in' ? <IconUp /> : <IconDown />}
                 </Td>
-                <Td>{item.motifs}</Td>
+                <Td onClick={() => handleEdit(item.date)}>{item.motifs}</Td>
                 <Td del onClick={() => handleDelete(item.date)}>
                   X
                 </Td>

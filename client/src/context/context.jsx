@@ -17,6 +17,7 @@ const AppProvider = ({ children }) => {
   const [selectAccount, setSelectAccount] = useState('');
   const [accounts, setAccounts] = useState([]);
   const [accountSelected, setAccountSelected] = useState({});
+  const [selectedDate, setSeletedDate] = useState(0);
 
   useEffect(() => {
     const fetchAccounts = async () => {
@@ -55,6 +56,8 @@ const AppProvider = ({ children }) => {
         accountSelected,
         setSelectAccount,
         accounts,
+        selectedDate,
+        setSeletedDate,
       }}
     >
       {children}
