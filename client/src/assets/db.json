@@ -4,22 +4,22 @@
       "name": "Caisse1",
       "amounts": [
         {
-          "date": 1677651543402,
-          "amount": 15000,
-          "type": "out",
-          "motifs": "dfsfd"
-        },
-        {
-          "date": 1677563788295,
-          "amount": 50000,
+          "date": 1678255027591,
+          "amount": 5000,
           "type": "in",
-          "motifs": "DFQFSDF"
+          "motifs": "Achat"
         },
         {
           "date": 1677715200000,
           "amount": 5000,
           "type": "out",
           "motifs": "Achat"
+        },
+        {
+          "date": 1677651543402,
+          "amount": 5000,
+          "type": "in",
+          "motifs": "Vente"
         }
       ],
       "id": 1

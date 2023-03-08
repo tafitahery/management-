@@ -138,8 +138,9 @@ export default function ModifyEntry({ show, setShow }) {
           placeholder="montant"
           value={entry.amount}
           onChange={handleChange}
+          required
         />
-        <Select name="type" value={entry.type} onChange={handleChange}>
+        <Select name="type" value={entry.type} onChange={handleChange} required>
           <Option value=""> --- </Option>
           <Option value="in">Entrée</Option>
           <Option value="out">Sortie</Option>
@@ -150,6 +151,7 @@ export default function ModifyEntry({ show, setShow }) {
           placeholder="motifs"
           value={entry.motifs}
           onChange={handleChange}
+          required
         />
         <Wrapper>
           <Button type="button" del onClick={() => setShow(false)}>
